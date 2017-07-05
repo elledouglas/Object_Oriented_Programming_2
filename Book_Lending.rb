@@ -1,35 +1,39 @@
 class Book
-  attr_accessor :due_date
 
+  @@on_shelf = []
+  @@on_loan = []
 
-  def intitialize
-    @@on_shelf = []
-    @@on_loan = []
-    @book = Book.new[:title, :author, :isbn]
+  def initialize(title, author, isbn)
 
+    @newbook = Book.new(title, author, isbn)
+end
+
+  def reader
+    return @due_date
+end
+
+  def write
+  return @due_date
+end
+
+  def self.create
+  @@on_shelf << @new_book
+  return @new_book
 end
 
 
-def self.create(title, author, isbn)
-  @book = [title, author, isbn]
-  @@on_shelf << @book
-
-  return @book
-end
-
-  def available
+  def self.available
   @@on_shelf
   return true
 end
 
-  def borrowed
+  def self.borrowed
  @@on_loan
 
 end
 
-
- def browse
-  @book.sample
+ def self.browse
+  @newbook.sample
  end
 
  def lent_out?
@@ -50,11 +54,12 @@ end
     elsif lent_out? == false
     current_due_date = Time.now #add time
     @@on_shelf.delete #
-    @@on_loan << @book
+    @@on_loan << @newbook
     return true
 
   end
 end
+
 
 
   def due_date
@@ -69,7 +74,7 @@ end
 
   elsif
     @@on_loan.delete
-    @@on_shelf << @book
+    @@on_shelf << @newbook
     due_date.new = nil
     return true
 
@@ -81,14 +86,17 @@ end
 #class Methodas
 
 
-  def current_due_date
+  def self.current_due_date
     Time.now
 end
 
-  def overdue_books
+  def self.overdue_books
     due_date <= Time.now
-  return @book
+  return @newbook
 end
 
 
 end
+
+puts jane = Book.new("Susie", "tom", "123")
+puts jane 
